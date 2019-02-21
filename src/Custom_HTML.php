@@ -6,27 +6,27 @@
  * Any modifications to or software including (via compiler) GPL-licensed code must also be made
  * available under the GPL along with build & install instructions.
  *
- * @package    WPS\Widgets
+ * @package    WPS\WP\Widgets
  * @author     Travis Smith <t@wpsmith.net>
- * @copyright  2015-2018 Travis Smith
+ * @copyright  2015-2019 Travis Smith
  * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @link       https://github.com/wpsmith/WPS
  * @version    1.0.0
  * @since      0.1.0
  */
 
-namespace WPS\Widgets;
+namespace WPS\WP\Widgets;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPS\Widgets\Custom_HTML' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Custom_HTML' ) ) {
 	/**
 	 * Class Custom_HTML
 	 *
-	 * @package WPS\Widgets
+	 * @package WPS\WP\Widgets
 	 */
 	class Custom_HTML extends \WP_Widget_Custom_HTML {
 		/**
@@ -98,7 +98,7 @@ if ( ! class_exists( 'WPS\Widgets\Custom_HTML' ) ) {
 			 *
 			 * @param string $content The widget content.
 			 * @param array $instance Array of settings for the current widget.
-			 * @param WP_Widget_Custom_HTML $this Current Custom HTML widget instance.
+			 * @param \WP_Widget_Custom_HTML $this Current Custom HTML widget instance.
 			 */
 			$content = apply_filters( 'widget_custom_html_content', $content, $instance, $this );
 

@@ -8,27 +8,27 @@
  * Any modifications to or software including (via compiler) GPL-licensed code must also be made
  * available under the GPL along with build & install instructions.
  *
- * @package    WPS\Widgets
+ * @package    WPS\WP\Widgets
  * @author     Travis Smith <t@wpsmith.net>
- * @copyright  2015-2018 Travis Smith
+ * @copyright  2015-2019 Travis Smith
  * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @link       https://github.com/wpsmith/WPS
  * @version    1.0.0
  * @since      0.1.0
  */
 
-namespace WPS\Widgets;
+namespace WPS\WP\Widgets;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPS\Widgets\Widget_Title' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Widget_Title' ) ) {
 	/**
 	 * Class Widget_Title
      *
-	 * @package WPS\Widgets
+	 * @package WPS\WP\Widgets
 	 */
 	class Widget_Title extends \WP_Widget {
 
@@ -40,11 +40,11 @@ if ( ! class_exists( 'WPS\Widgets\Widget_Title' ) ) {
 			/* Widget settings. */
 			$widget_ops = array(
 				'classname'   => 'site_title_widget',
-				'description' => __( 'A widget that displays a title.', WPSCORE_PLUGIN_DOMAIN ),
+				'description' => __( 'A widget that displays a title.', 'wps' ),
 			);
 
 			/* Create the widget. */
-			parent::__construct( 'site_title_widget', __( 'Title Widget', WPSCORE_PLUGIN_DOMAIN ), $widget_ops );
+			parent::__construct( 'site_title_widget', __( 'Title Widget', 'wps' ), $widget_ops );
 		}
 
 		/**
@@ -127,14 +127,14 @@ if ( ! class_exists( 'WPS\Widgets\Widget_Title' ) ) {
 			$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', WPS_TEXT_DOMAIN ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wps' ) ?></label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                        name="<?php echo $this->get_field_name( 'title' ); ?>"
                        value="<?php echo $instance['title']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'tag' ); ?>"><?php _e( 'Tag:', WPS_TEXT_DOMAIN ) ?> </label>
+                <label for="<?php echo $this->get_field_id( 'tag' ); ?>"><?php _e( 'Tag:', 'wps' ) ?> </label>
                 <select id="<?php echo esc_attr( $this->get_field_id( 'tag' ) ); ?>"
                         name="<?php echo esc_attr( $this->get_field_name( 'tag' ) ); ?>">
                     <option value="h1" <?php selected( 'h1', $instance['tag'] ); ?>><?php echo 'h1'; ?></option>

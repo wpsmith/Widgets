@@ -8,27 +8,27 @@
  * Any modifications to or software including (via compiler) GPL-licensed code must also be made
  * available under the GPL along with build & install instructions.
  *
- * @package    WPS\Widgets
+ * @package    WPS\WP\Widgets
  * @author     Travis Smith <t@wpsmith.net>
- * @copyright  2015-2018 Travis Smith
+ * @copyright  2015-2019 Travis Smith
  * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @link       https://github.com/wpsmith/WPS
  * @version    1.0.0
  * @since      0.1.0
  */
 
-namespace WPS\Widgets;
+namespace WPS\WP\Widgets;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPS\Widgets\Widget_Contact' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Widget_Contact' ) ) {
 	/**
 	 * Class Widget_Contact.
 	 *
-	 * @package WPS\Widgets
+	 * @package WPS\WP\Widgets
 	 */
 	class Widget_Contact extends \WP_Widget {
 
@@ -40,11 +40,11 @@ if ( ! class_exists( 'WPS\Widgets\Widget_Contact' ) ) {
 			/* Widget settings. */
 			$widget_ops = array(
 				'classname'   => 'site_contact_widget',
-				'description' => __( 'A widget that addresses your contact information.', WPSCORE_PLUGIN_DOMAIN ),
+				'description' => __( 'A widget that addresses your contact information.', 'wps' ),
 			);
 
 			/* Create the widget. */
-			parent::__construct( 'site_contact_widget', __( 'Contact Widget', WPSCORE_PLUGIN_DOMAIN ), $widget_ops );
+			parent::__construct( 'site_contact_widget', __( 'Contact Widget', 'wps' ), $widget_ops );
 		}
 
 		/**
@@ -145,7 +145,7 @@ if ( ! class_exists( 'WPS\Widgets\Widget_Contact' ) ) {
 		 */
 		protected function get_defaults() {
 			return array(
-				'title'     => __( 'Contact', WPSCORE_PLUGIN_DOMAIN ),
+				'title'     => __( 'Contact', 'wps' ),
 				'telephone' => '',
 				'fax'       => '',
 				'email'     => '',
@@ -194,48 +194,48 @@ if ( ! class_exists( 'WPS\Widgets\Widget_Contact' ) ) {
 			$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', WPSCORE_PLUGIN_DOMAIN ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wps' ) ?></label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                        name="<?php echo $this->get_field_name( 'title' ); ?>"
                        value="<?php echo $instance['title']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'telephone' ); ?>"><?php _e( 'Telephone:', WPSCORE_PLUGIN_DOMAIN ) ?> </label>
+                <label for="<?php echo $this->get_field_id( 'telephone' ); ?>"><?php _e( 'Telephone:', 'wps' ) ?> </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'telephone' ); ?>"
                        name="<?php echo $this->get_field_name( 'telephone' ); ?>"
                        value="<?php echo $instance['telephone']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'fax' ); ?>"><?php _e( 'Fax:', WPSCORE_PLUGIN_DOMAIN ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'fax' ); ?>"><?php _e( 'Fax:', 'wps' ) ?></label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'fax' ); ?>"
                        name="<?php echo $this->get_field_name( 'fax' ); ?>" value="<?php echo $instance['fax']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'email' ); ?>"><?php _e( 'Email:', WPSCORE_PLUGIN_DOMAIN ) ?> </label>
+                <label for="<?php echo $this->get_field_id( 'email' ); ?>"><?php _e( 'Email:', 'wps' ) ?> </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'email' ); ?>"
                        name="<?php echo $this->get_field_name( 'email' ); ?>"
                        value="<?php echo $instance['email']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'address' ); ?>"><?php _e( 'Address:', WPSCORE_PLUGIN_DOMAIN ) ?> </label>
+                <label for="<?php echo $this->get_field_id( 'address' ); ?>"><?php _e( 'Address:', 'wps' ) ?> </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'address' ); ?>"
                        name="<?php echo $this->get_field_name( 'address' ); ?>"
                        value="<?php echo $instance['address']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'skype' ); ?>"><?php _e( 'Skype:', WPSCORE_PLUGIN_DOMAIN ) ?> </label>
+                <label for="<?php echo $this->get_field_id( 'skype' ); ?>"><?php _e( 'Skype:', 'wps' ) ?> </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'skype' ); ?>"
                        name="<?php echo $this->get_field_name( 'skype' ); ?>"
                        value="<?php echo $instance['skype']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Text:', WPSCORE_PLUGIN_DOMAIN ) ?> </label>
+                <label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Text:', 'wps' ) ?> </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'text' ); ?>"
                        name="<?php echo $this->get_field_name( 'text' ); ?>"
                        value="<?php echo esc_html( $instance['text'] ); ?>"/>

@@ -8,29 +8,29 @@
  * Any modifications to or software including (via compiler) GPL-licensed code must also be made
  * available under the GPL along with build & install instructions.
  *
- * @package    WPS\Widgets
+ * @package    WPS\WP\Widgets
  * @author     Travis Smith <t@wpsmith.net>
- * @copyright  2015-2018 Travis Smith
+ * @copyright  2015-2019 Travis Smith
  * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @link       https://github.com/wpsmith/WPS
  * @version    1.0.0
  * @since      0.1.0
  */
 
-namespace WPS\Widgets;
+namespace WPS\WP\Widgets;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPS\Widgets\WP_Widget' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Widget' ) ) {
 	/**
-	 * Class WP_Widget.
+	 * Class Widget.
 	 *
-	 * @package WPS\Widgets
+	 * @package WPS\WP\Widgets
 	 */
-	abstract class WP_Widget extends \WP_Widget {
+	abstract class Widget extends \WP_Widget {
 
 		/**
 		 * Holds widget settings defaults, populated in constructor.

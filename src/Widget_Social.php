@@ -8,27 +8,27 @@
  * Any modifications to or software including (via compiler) GPL-licensed code must also be made
  * available under the GPL along with build & install instructions.
  *
- * @package    WPS\Widgets
+ * @package    WPS\WP\Widgets
  * @author     Travis Smith <t@wpsmith.net>
- * @copyright  2015-2018 Travis Smith
+ * @copyright  2015-2019 Travis Smith
  * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @link       https://github.com/wpsmith/WPS
  * @version    1.0.0
  * @since      0.1.0
  */
 
-namespace WPS\Widgets;
+namespace WPS\WP\Widgets;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPS\Widgets\Widget_Social' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Widget_Social' ) ) {
 	/**
 	 * Class Widget_Social
      *
-	 * @package WPS\Widgets
+	 * @package WPS\WP\Widgets
 	 */
 	class Widget_Social extends \WP_Widget {
 
@@ -42,11 +42,11 @@ if ( ! class_exists( 'WPS\Widgets\Widget_Social' ) ) {
 			/* Widget settings. */
 			$widget_ops = array(
 				'classname'   => 'site_social_widget',
-				'description' => __( 'A widget that addresses your social information.', WPSCORE_PLUGIN_DOMAIN ),
+				'description' => __( 'A widget that addresses your social information.', 'wps' ),
 			);
 
 			/* Create the widget. */
-			parent::__construct( 'site_social_widget', __( 'Social Widget', WPSCORE_PLUGIN_DOMAIN ), $widget_ops );
+			parent::__construct( 'site_social_widget', __( 'Social Widget', 'wps' ), $widget_ops );
 		}
 
 		/**
@@ -221,35 +221,35 @@ if ( ! class_exists( 'WPS\Widgets\Widget_Social' ) ) {
 			?>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', WPSCORE_PLUGIN_DOMAIN ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wps' ) ?></label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                        name="<?php echo $this->get_field_name( 'title' ); ?>"
                        value="<?php echo $instance['title']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'facebook' ); ?>"><?php _e( 'Facebook:', WPSCORE_PLUGIN_DOMAIN ) ?> </label>
+                <label for="<?php echo $this->get_field_id( 'facebook' ); ?>"><?php _e( 'Facebook:', 'wps' ) ?> </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'facebook' ); ?>"
                        name="<?php echo $this->get_field_name( 'facebook' ); ?>"
                        value="<?php echo $instance['facebook']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'twitter' ); ?>"><?php _e( 'Twitter:', WPSCORE_PLUGIN_DOMAIN ) ?></label>
+                <label for="<?php echo $this->get_field_id( 'twitter' ); ?>"><?php _e( 'Twitter:', 'wps' ) ?></label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'twitter' ); ?>"
                        name="<?php echo $this->get_field_name( 'twitter' ); ?>"
                        value="<?php echo $instance['twitter']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'email' ); ?>"><?php _e( 'Email:', WPSCORE_PLUGIN_DOMAIN ) ?> </label>
+                <label for="<?php echo $this->get_field_id( 'email' ); ?>"><?php _e( 'Email:', 'wps' ) ?> </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'email' ); ?>"
                        name="<?php echo $this->get_field_name( 'email' ); ?>"
                        value="<?php echo $instance['email']; ?>"/>
             </p>
 
             <p>
-                <label for="<?php echo $this->get_field_id( 'instagram' ); ?>"><?php _e( 'Instagram:', WPSCORE_PLUGIN_DOMAIN ) ?> </label>
+                <label for="<?php echo $this->get_field_id( 'instagram' ); ?>"><?php _e( 'Instagram:', 'wps' ) ?> </label>
                 <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'instagram' ); ?>"
                        name="<?php echo $this->get_field_name( 'instagram' ); ?>"
                        value="<?php echo $instance['instagram']; ?>"/>

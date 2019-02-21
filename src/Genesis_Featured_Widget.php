@@ -8,27 +8,27 @@
  * Any modifications to or software including (via compiler) GPL-licensed code must also be made
  * available under the GPL along with build & install instructions.
  *
- * @package    WPS\Widgets
+ * @package    WPS\WP\Widgets
  * @author     Travis Smith <t@wpsmith.net>
- * @copyright  2015-2018 Travis Smith
+ * @copyright  2015-2019 Travis Smith
  * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @link       https://github.com/wpsmith/WPS
  * @version    1.0.0
  * @since      0.1.0
  */
 
-namespace WPS\Widgets;
+namespace WPS\WP\Widgets;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Genesis_Featured_Widget' ) ) {
 	/**
 	 * WPS Featured "abstract" widget class.
 	 *
-	 * @package WPS\Widgets
+	 * @package WPS\WP\Widgets
 	 */
 	abstract class Genesis_Featured_Widget extends WP_Widget {
 
@@ -56,7 +56,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
 
 			$widget_ops = array(
 				'classname'   => 'featured-content featuredpost featured-' . $this->post_type,
-				'description' => __( 'Displays featured ' . $name . ' with thumbnails', WPSCORE_PLUGIN_DOMAIN ),
+				'description' => __( 'Displays featured ' . $name . ' with thumbnails', 'wps' ),
 			);
 
 			$control_ops = array(
@@ -65,7 +65,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
 				'height'  => 350,
 			);
 
-			parent::__construct( 'featured-' . $this->post_type, __( 'Genesis - Featured ' . $name, WPSCORE_PLUGIN_DOMAIN ), $widget_ops, $control_ops );
+			parent::__construct( 'featured-' . $this->post_type, __( 'Genesis - Featured ' . $name, 'wps' ), $widget_ops, $control_ops );
 
 			add_filter( 'genesis_attr_entry', array( $this, 'genesis_attributes_entry' ), 10, 3 );
 
@@ -92,7 +92,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
 				'post_info'         => '',
 				'show_content'      => 'excerpt',
 				'content_limit'     => '',
-				'more_text'         => __( '[Read More...]', WPSCORE_PLUGIN_DOMAIN ),
+				'more_text'         => __( '[Read More...]', 'wps' ),
 				'extra_num'         => '',
 				'extra_title'       => '',
 				'class'             => '',
@@ -217,7 +217,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
 
 				if ( ! empty( $instance['show_title'] ) ) {
 
-					$title = get_the_title() ? get_the_title() : __( '(no title)', WPSCORE_PLUGIN_DOMAIN );
+					$title = get_the_title() ? get_the_title() : __( '(no title)', 'wps' );
 
 					/**
 					 * Filter the featured post widget title.
@@ -419,7 +419,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
 			$pt       = get_post_type_object( $this->post_type );
 			?>
             <p>
-                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', WPSCORE_PLUGIN_DOMAIN ); ?>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'wps' ); ?>
                     :</label>
                 <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>"
                        name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>"
@@ -434,12 +434,12 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
 					if ( count( $taxonomies ) > 0 ) :
 						?>
                         <p>
-                            <label for="<?php echo esc_attr( $this->get_field_id( 'taxonomy' ) ); ?>"><?php _e( 'Taxonomy', WPSCORE_PLUGIN_DOMAIN ); ?>
+                            <label for="<?php echo esc_attr( $this->get_field_id( 'taxonomy' ) ); ?>"><?php _e( 'Taxonomy', 'wps' ); ?>
                                 :</label>
                             <select id="<?php echo esc_attr( $this->get_field_id( 'taxonomy' ) ); ?>"
                                     onchange="wpsWidgetSave(this)"
                                     name="<?php echo esc_attr( $this->get_field_name( 'taxonomy' ) ); ?>">
-                                <option value="">- <?php _e( 'None', WPSCORE_PLUGIN_DOMAIN ); ?> -</option>
+                                <option value="">- <?php _e( 'None', 'wps' ); ?> -</option>
 								<?php
 								foreach ( (array) $taxonomies as $taxonomy ) {
 									printf( '<option value="%s" %s>%s</option>', esc_attr( $taxonomy->name ), selected( $taxonomy->name, $instance['taxonomy'], false ), esc_html( $taxonomy->label ) );
@@ -455,12 +455,12 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
 						if ( $instance['taxonomy'] ) :
 							?>
                             <p>
-                                <label for="<?php echo esc_attr( $this->get_field_id( 'term' ) ); ?>"><?php _e( 'Term', WPSCORE_PLUGIN_DOMAIN ); ?>
+                                <label for="<?php echo esc_attr( $this->get_field_id( 'term' ) ); ?>"><?php _e( 'Term', 'wps' ); ?>
                                     :</label>
                                 <select id="<?php echo esc_attr( $this->get_field_id( 'term' ) ); ?>"
                                         onchange="wpsWidgetSave(this)"
                                         name="<?php echo esc_attr( $this->get_field_name( 'term' ) ); ?>">
-                                    <option value="">- <?php _e( 'None', WPSCORE_PLUGIN_DOMAIN ); ?> -</option>
+                                    <option value="">- <?php _e( 'None', 'wps' ); ?> -</option>
 									<?php
 									foreach ( (array) $terms as $term ) {
 										printf( '<option value="%s" %s>%s</option>', esc_attr( $term->term_id ), selected( $term->term_id, $instance['term'], false ), esc_html( $term->name ) );
@@ -473,7 +473,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
 					endif;
 					?>
                     <p>
-                        <label for="<?php echo esc_attr( $this->get_field_id( 'posts_num' ) ); ?>"><?php _e( 'Number of Posts to Show', WPSCORE_PLUGIN_DOMAIN ); ?>
+                        <label for="<?php echo esc_attr( $this->get_field_id( 'posts_num' ) ); ?>"><?php _e( 'Number of Posts to Show', 'wps' ); ?>
                             :</label>
                         <input type="text" id="<?php echo esc_attr( $this->get_field_id( 'posts_num' ) ); ?>"
                                name="<?php echo esc_attr( $this->get_field_name( 'posts_num' ) ); ?>"
@@ -481,7 +481,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
                     </p>
 
                     <p>
-                        <label for="<?php echo esc_attr( $this->get_field_id( 'posts_offset' ) ); ?>"><?php _e( 'Number of Posts to Offset', WPSCORE_PLUGIN_DOMAIN ); ?>
+                        <label for="<?php echo esc_attr( $this->get_field_id( 'posts_offset' ) ); ?>"><?php _e( 'Number of Posts to Offset', 'wps' ); ?>
                             :</label>
                         <input type="text" id="<?php echo esc_attr( $this->get_field_id( 'posts_offset' ) ); ?>"
                                name="<?php echo esc_attr( $this->get_field_name( 'posts_offset' ) ); ?>"
@@ -489,28 +489,28 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
                     </p>
 
                     <p>
-                        <label for="<?php echo esc_attr( $this->get_field_id( 'orderby' ) ); ?>"><?php _e( 'Order By', WPSCORE_PLUGIN_DOMAIN ); ?>
+                        <label for="<?php echo esc_attr( $this->get_field_id( 'orderby' ) ); ?>"><?php _e( 'Order By', 'wps' ); ?>
                             :</label>
                         <select id="<?php echo esc_attr( $this->get_field_id( 'orderby' ) ); ?>"
                                 onchange="wpsWidgetSave(this)"
                                 name="<?php echo esc_attr( $this->get_field_name( 'orderby' ) ); ?>">
-                            <option value="date" <?php selected( 'date', $instance['orderby'] ); ?>><?php _e( 'Date', WPSCORE_PLUGIN_DOMAIN ); ?></option>
-                            <option value="title" <?php selected( 'title', $instance['orderby'] ); ?>><?php _e( 'Title', WPSCORE_PLUGIN_DOMAIN ); ?></option>
-                            <option value="parent" <?php selected( 'parent', $instance['orderby'] ); ?>><?php _e( 'Parent', WPSCORE_PLUGIN_DOMAIN ); ?></option>
-                            <option value="ID" <?php selected( 'ID', $instance['orderby'] ); ?>><?php _e( 'ID', WPSCORE_PLUGIN_DOMAIN ); ?></option>
-                            <option value="comment_count" <?php selected( 'comment_count', $instance['orderby'] ); ?>><?php _e( 'Comment Count', WPSCORE_PLUGIN_DOMAIN ); ?></option>
-                            <option value="rand" <?php selected( 'rand', $instance['orderby'] ); ?>><?php _e( 'Random', WPSCORE_PLUGIN_DOMAIN ); ?></option>
+                            <option value="date" <?php selected( 'date', $instance['orderby'] ); ?>><?php _e( 'Date', 'wps' ); ?></option>
+                            <option value="title" <?php selected( 'title', $instance['orderby'] ); ?>><?php _e( 'Title', 'wps' ); ?></option>
+                            <option value="parent" <?php selected( 'parent', $instance['orderby'] ); ?>><?php _e( 'Parent', 'wps' ); ?></option>
+                            <option value="ID" <?php selected( 'ID', $instance['orderby'] ); ?>><?php _e( 'ID', 'wps' ); ?></option>
+                            <option value="comment_count" <?php selected( 'comment_count', $instance['orderby'] ); ?>><?php _e( 'Comment Count', 'wps' ); ?></option>
+                            <option value="rand" <?php selected( 'rand', $instance['orderby'] ); ?>><?php _e( 'Random', 'wps' ); ?></option>
                         </select>
                     </p>
 
                     <p>
-                        <label for="<?php echo esc_attr( $this->get_field_id( 'order' ) ); ?>"><?php _e( 'Sort Order', WPSCORE_PLUGIN_DOMAIN ); ?>
+                        <label for="<?php echo esc_attr( $this->get_field_id( 'order' ) ); ?>"><?php _e( 'Sort Order', 'wps' ); ?>
                             :</label>
                         <select id="<?php echo esc_attr( $this->get_field_id( 'order' ) ); ?>"
                                 onchange="wpsWidgetSave(this)"
                                 name="<?php echo esc_attr( $this->get_field_name( 'order' ) ); ?>">
-                            <option value="DESC" <?php selected( 'DESC', $instance['order'] ); ?>><?php _e( 'Descending (3, 2, 1)', WPSCORE_PLUGIN_DOMAIN ); ?></option>
-                            <option value="ASC" <?php selected( 'ASC', $instance['order'] ); ?>><?php _e( 'Ascending (1, 2, 3)', WPSCORE_PLUGIN_DOMAIN ); ?></option>
+                            <option value="DESC" <?php selected( 'DESC', $instance['order'] ); ?>><?php _e( 'Descending (3, 2, 1)', 'wps' ); ?></option>
+                            <option value="ASC" <?php selected( 'ASC', $instance['order'] ); ?>><?php _e( 'Ascending (1, 2, 3)', 'wps' ); ?></option>
                         </select>
                     </p>
 
@@ -520,7 +520,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
                                onchange="wpsWidgetSave(this)"
                                name="<?php echo esc_attr( $this->get_field_name( 'exclude_displayed' ) ); ?>"
                                value="1" <?php checked( $instance['exclude_displayed'] ); ?>/>
-                        <label for="<?php echo esc_attr( $this->get_field_id( 'exclude_displayed' ) ); ?>"><?php _e( 'Exclude Previously Displayed Posts?', WPSCORE_PLUGIN_DOMAIN ); ?></label>
+                        <label for="<?php echo esc_attr( $this->get_field_id( 'exclude_displayed' ) ); ?>"><?php _e( 'Exclude Previously Displayed Posts?', 'wps' ); ?></label>
                     </p>
 
                     <p>
@@ -528,7 +528,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
                                onchange="wpsWidgetSave(this)"
                                name="<?php echo esc_attr( $this->get_field_name( 'exclude_sticky' ) ); ?>"
                                value="1" <?php checked( $instance['exclude_sticky'] ); ?>/>
-                        <label for="<?php echo esc_attr( $this->get_field_id( 'exclude_sticky' ) ); ?>"><?php _e( 'Exclude Sticky Posts?', WPSCORE_PLUGIN_DOMAIN ); ?></label>
+                        <label for="<?php echo esc_attr( $this->get_field_id( 'exclude_sticky' ) ); ?>"><?php _e( 'Exclude Sticky Posts?', 'wps' ); ?></label>
                     </p>
 
                 </div>
@@ -544,34 +544,34 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
                                onchange="wpsWidgetSave(this)"
                                name="<?php echo esc_attr( $this->get_field_name( 'show_title' ) ); ?>"
                                value="1" <?php checked( $instance['show_title'] ); ?>/>
-                        <label for="<?php echo esc_attr( $this->get_field_id( 'show_title' ) ); ?>"><?php _e( 'Show Post Title', WPSCORE_PLUGIN_DOMAIN ); ?></label>
+                        <label for="<?php echo esc_attr( $this->get_field_id( 'show_title' ) ); ?>"><?php _e( 'Show Post Title', 'wps' ); ?></label>
                     </p>
 
                     <p>
-                        <label for="<?php echo esc_attr( $this->get_field_id( 'show_content' ) ); ?>"><?php _e( 'Content Type', WPSCORE_PLUGIN_DOMAIN ); ?>
+                        <label for="<?php echo esc_attr( $this->get_field_id( 'show_content' ) ); ?>"><?php _e( 'Content Type', 'wps' ); ?>
                             :</label>
                         <select id="<?php echo esc_attr( $this->get_field_id( 'show_content' ) ); ?>"
                                 onchange="wpsWidgetSave(this)"
                                 name="<?php echo esc_attr( $this->get_field_name( 'show_content' ) ); ?>">
 							<?php if ( post_type_supports( $this->post_type, 'content' ) ) : ?>
-                                <option value="content" <?php selected( 'content', $instance['show_content'] ); ?>><?php _e( 'Show Content', WPSCORE_PLUGIN_DOMAIN ); ?></option>
+                                <option value="content" <?php selected( 'content', $instance['show_content'] ); ?>><?php _e( 'Show Content', 'wps' ); ?></option>
 							<?php endif; ?>
 							<?php if ( post_type_supports( $this->post_type, 'content' ) ) : ?>
-                                <option value="excerpt" <?php selected( 'excerpt', $instance['show_content'] ); ?>><?php _e( 'Show Excerpt', WPSCORE_PLUGIN_DOMAIN ); ?></option>
+                                <option value="excerpt" <?php selected( 'excerpt', $instance['show_content'] ); ?>><?php _e( 'Show Excerpt', 'wps' ); ?></option>
 							<?php endif; ?>
 							<?php if ( post_type_supports( $this->post_type, 'content' ) ) : ?>
-                                <option value="content-limit" <?php selected( 'content-limit', $instance['show_content'] ); ?>><?php _e( 'Show Content Limit', WPSCORE_PLUGIN_DOMAIN ); ?></option>
+                                <option value="content-limit" <?php selected( 'content-limit', $instance['show_content'] ); ?>><?php _e( 'Show Content Limit', 'wps' ); ?></option>
 							<?php endif; ?>
-                            <option value="" <?php selected( '', $instance['show_content'] ); ?>><?php _e( 'No Content', WPSCORE_PLUGIN_DOMAIN ); ?></option>
+                            <option value="" <?php selected( '', $instance['show_content'] ); ?>><?php _e( 'No Content', 'wps' ); ?></option>
                         </select>
 						<?php if ( post_type_supports( $this->post_type, 'content' ) && $instance['show_content'] === 'content-limit' ) : ?>
                             <br/>
-                            <label for="<?php echo esc_attr( $this->get_field_id( 'content_limit' ) ); ?>"><?php _e( 'Limit content to', WPSCORE_PLUGIN_DOMAIN ); ?>
+                            <label for="<?php echo esc_attr( $this->get_field_id( 'content_limit' ) ); ?>"><?php _e( 'Limit content to', 'wps' ); ?>
                                 <input type="text"
                                        id="<?php echo esc_attr( $this->get_field_id( 'content_limit' ) ); ?>"
                                        name="<?php echo esc_attr( $this->get_field_name( 'content_limit' ) ); ?>"
                                        value="<?php echo esc_attr( (int) $instance['content_limit'] ); ?>" size="3"/>
-								<?php _e( 'characters', WPSCORE_PLUGIN_DOMAIN ); ?>
+								<?php _e( 'characters', 'wps' ); ?>
                             </label>
 						<?php endif; ?>
                     </p>
@@ -581,7 +581,7 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
 						( post_type_supports( $this->post_type, 'excerpt' ) && $instance['show_content'] === 'excerpt' )
 					) : ?>
                         <p>
-                            <label for="<?php echo esc_attr( $this->get_field_id( 'more_text' ) ); ?>"><?php _e( 'More Text (if applicable)', WPSCORE_PLUGIN_DOMAIN ); ?>
+                            <label for="<?php echo esc_attr( $this->get_field_id( 'more_text' ) ); ?>"><?php _e( 'More Text (if applicable)', 'wps' ); ?>
                                 :</label>
                             <input type="text" id="<?php echo esc_attr( $this->get_field_id( 'more_text' ) ); ?>"
                                    name="<?php echo esc_attr( $this->get_field_name( 'more_text' ) ); ?>"
@@ -598,11 +598,11 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
                                    onchange="wpsWidgetSave(this)"
                                    name="<?php echo esc_attr( $this->get_field_name( 'show_image' ) ); ?>"
                                    value="1" <?php checked( $instance['show_image'] ); ?>/>
-                            <label for="<?php echo esc_attr( $this->get_field_id( 'show_image' ) ); ?>"><?php _e( 'Show Featured Image', WPSCORE_PLUGIN_DOMAIN ); ?></label>
+                            <label for="<?php echo esc_attr( $this->get_field_id( 'show_image' ) ); ?>"><?php _e( 'Show Featured Image', 'wps' ); ?></label>
                         </p>
 
                         <p>
-                            <label for="<?php echo esc_attr( $this->get_field_id( 'image_size' ) ); ?>"><?php _e( 'Image Size', WPSCORE_PLUGIN_DOMAIN ); ?>
+                            <label for="<?php echo esc_attr( $this->get_field_id( 'image_size' ) ); ?>"><?php _e( 'Image Size', 'wps' ); ?>
                                 :</label>
                             <select id="<?php echo esc_attr( $this->get_field_id( 'image_size' ) ); ?>"
                                     onchange="wpsWidgetSave(this)"
@@ -618,15 +618,15 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
                         </p>
 
                         <p>
-                            <label for="<?php echo esc_attr( $this->get_field_id( 'image_alignment' ) ); ?>"><?php _e( 'Image Alignment', WPSCORE_PLUGIN_DOMAIN ); ?>
+                            <label for="<?php echo esc_attr( $this->get_field_id( 'image_alignment' ) ); ?>"><?php _e( 'Image Alignment', 'wps' ); ?>
                                 :</label>
                             <select id="<?php echo esc_attr( $this->get_field_id( 'image_alignment' ) ); ?>"
                                     onchange="wpsWidgetSave(this)"
                                     name="<?php echo esc_attr( $this->get_field_name( 'image_alignment' ) ); ?>">
-                                <option value="alignnone">- <?php _e( 'None', WPSCORE_PLUGIN_DOMAIN ); ?> -</option>
-                                <option value="alignleft" <?php selected( 'alignleft', $instance['image_alignment'] ); ?>><?php _e( 'Left', WPSCORE_PLUGIN_DOMAIN ); ?></option>
-                                <option value="alignright" <?php selected( 'alignright', $instance['image_alignment'] ); ?>><?php _e( 'Right', WPSCORE_PLUGIN_DOMAIN ); ?></option>
-                                <option value="aligncenter" <?php selected( 'aligncenter', $instance['image_alignment'] ); ?>><?php _e( 'Center', WPSCORE_PLUGIN_DOMAIN ); ?></option>
+                                <option value="alignnone">- <?php _e( 'None', 'wps' ); ?> -</option>
+                                <option value="alignleft" <?php selected( 'alignleft', $instance['image_alignment'] ); ?>><?php _e( 'Left', 'wps' ); ?></option>
+                                <option value="alignright" <?php selected( 'alignright', $instance['image_alignment'] ); ?>><?php _e( 'Right', 'wps' ); ?></option>
+                                <option value="aligncenter" <?php selected( 'aligncenter', $instance['image_alignment'] ); ?>><?php _e( 'Center', 'wps' ); ?></option>
                             </select>
                         </p>
 
@@ -636,22 +636,22 @@ if ( ! class_exists( 'WPS\Widgets\Genesis_Featured_Widget' ) ) {
                 <div class="genesis-widget-column-box" style="margin-bottom: 10px;">
 
                     <p>
-                        <label for="<?php echo esc_attr( $this->get_field_id( 'class' ) ); ?>"><?php _e( 'Column Class', WPSCORE_PLUGIN_DOMAIN ); ?>
+                        <label for="<?php echo esc_attr( $this->get_field_id( 'class' ) ); ?>"><?php _e( 'Column Class', 'wps' ); ?>
                             :</label>
                         <select id="<?php echo esc_attr( $this->get_field_id( 'class' ) ); ?>" style="max-width: 100%;"
                                 onchange="wpsWidgetSave(this)"
                                 name="<?php echo esc_attr( $this->get_field_name( 'class' ) ); ?>">
-                            <option value="">- <?php _e( 'None', WPSCORE_PLUGIN_DOMAIN ); ?> -</option>
+                            <option value="">- <?php _e( 'None', 'wps' ); ?> -</option>
 							<?php
 							foreach (
 								array(
-									'one-half'      => __( 'One-Half (Two-Fourths, Three-Sixths)', WPSCORE_PLUGIN_DOMAIN ),
-									'one-third'     => __( 'One-Third (Two-Sixths)', WPSCORE_PLUGIN_DOMAIN ),
-									'one-fourth'    => __( 'One-Fourth', WPSCORE_PLUGIN_DOMAIN ),
-									'one-sixth'     => __( 'One-Sixth', WPSCORE_PLUGIN_DOMAIN ),
-									'two-thirds'    => __( 'Four-Sixths', WPSCORE_PLUGIN_DOMAIN ),
-									'three-fourths' => __( 'Three-Fourths', WPSCORE_PLUGIN_DOMAIN ),
-									'five-sixths'   => __( 'Five-Sixths', WPSCORE_PLUGIN_DOMAIN ),
+									'one-half'      => __( 'One-Half (Two-Fourths, Three-Sixths)', 'wps' ),
+									'one-third'     => __( 'One-Third (Two-Sixths)', 'wps' ),
+									'one-fourth'    => __( 'One-Fourth', 'wps' ),
+									'one-sixth'     => __( 'One-Sixth', 'wps' ),
+									'two-thirds'    => __( 'Four-Sixths', 'wps' ),
+									'three-fourths' => __( 'Three-Fourths', 'wps' ),
+									'five-sixths'   => __( 'Five-Sixths', 'wps' ),
 								) as $value => $class
 							) {
 								printf(
